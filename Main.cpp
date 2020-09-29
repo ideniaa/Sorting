@@ -1,14 +1,3 @@
-/*  Program: Project 2
-    Author: Idenia Ayala
-    Class: CSCI 230
-    Date: 4/20/20
-    Description:
-
-    I certify that the code below is my own work.
-
-     Exception(s): N/A
-
-*/
 
 #include <iostream>
 #include <string>
@@ -28,13 +17,11 @@ int main()
      cout << "Enter name of file\n";         // enter file name to open
      cin >> file_name;
 
-    Sorting<int, string, Comparator> S(file_name);    // use when doing <int, string> pairs
-  // Sorting<string, int, Comparator> S(file_name);    // uncomment when doing <string, int> pairs
+    Sorting<int, string, Comparator> S(file_name);    //  <int, string> pairs
 
    ofstream outFile("integer-key.txt");      // create output txt file
-  // ofstream outFile("string-key.txt");     // uncomment when doing <string, int> pairs
 
-     // run through all test cases at one go      // comment out for large txt file
+     // run through all test cases at one go     
      auto start1 = chrono::steady_clock::now();        
      S.insertionSort();                                               // insertion sort
      auto end1 = chrono::steady_clock::now();
@@ -53,12 +40,6 @@ int main()
      auto time3 = chrono::duration_cast<chrono::milliseconds>(end3 - start3);
      S.report(outFile, "Quick-Sort", time3);
 
-     auto start4 = chrono::steady_clock::now();
-     S.quickSort3();;                                                 // quicksort3
-     auto end4 = chrono::steady_clock::now();
-     auto time4 = chrono::duration_cast<chrono::milliseconds>(end4 - start4);
-     S.report(outFile, "Quick-Sort3", time4);
-
      auto start5 = chrono::steady_clock::now();
      S.heapSort();                                                    // heap sort
      auto end5 = chrono::steady_clock::now();
@@ -74,58 +55,6 @@ int main()
      outFile.close();
 
      cout << "Output text file created.\n"; // output relevant info for input data to a txt file
-     
-     /*
-     do {                                  // will output txt file for each chosen sorting method
-
-          cout << "\nEnter sorting algorithm or enter q to quit\n";      //  enter sorting method 
-          cin >> sort;
-          cout << endl;
-          if (sort == "insertion-sort") {
-               auto start = chrono::steady_clock::now();
-               S.insertionSort();
-               auto end = chrono::steady_clock::now();
-               auto time = chrono::duration_cast<chrono::milliseconds>(end - start);
-               S.report(sort, time);
-          }
-          if (sort == "merge-sort") {
-               auto start = chrono::steady_clock::now();
-               S.mergeSort();
-               auto end = chrono::steady_clock::now();
-               auto time = chrono::duration_cast<chrono::milliseconds>(end - start);
-               S.report(sort, time);
-          }
-          if (sort == "quick-sort") {
-               auto start = chrono::steady_clock::now();
-               S.quickSort();
-               auto end = chrono::steady_clock::now();
-               auto time = chrono::duration_cast<chrono::milliseconds>(end - start);
-               S.report(sort, time);
-          }
-          if (sort == "quick-sort3") {
-               auto start = chrono::steady_clock::now();
-               S.quickSort3();;
-               auto end = chrono::steady_clock::now();
-               auto time = chrono::duration_cast<chrono::milliseconds>(end - start);
-               S.report(sort, time);
-          }
-          if (sort == "heap-sort") {
-               auto start = chrono::steady_clock::now();
-               S.heapSort();
-               auto end = chrono::steady_clock::now();
-               auto time = chrono::duration_cast<chrono::milliseconds>(end - start);
-               S.report(sort, time);
-          }
-          if (sort == "shell-sort") {
-               auto start = chrono::steady_clock::now();
-               S.shellSort();
-               auto end = chrono::steady_clock::now();
-               auto time = chrono::duration_cast<chrono::milliseconds>(end - start);
-               S.report(sort, time);
-          }
-     }
-     while (sort != "q");
-     */
 
      return 0;
 }
