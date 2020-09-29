@@ -21,7 +21,6 @@ public:
      void insertionSort();
      void quickSort();
      void mergeSort();
-     void quickSort3();
      void heapSort();
      void shellSort();                    // outputs text file
      // outputs relevant info report
@@ -33,8 +32,6 @@ protected:
      C less;                                 // comparator
      void merge(vector<Entry>& in, vector<Entry>& out, int b, int m);
      void quickSortStep(int a, int b);
-     void quickSortStep3(int a, int b);
-     int median3(int a, int b);
      void heapify(int length, int i);
 private:
      int n;                             // size of file
@@ -200,62 +197,6 @@ inline void Sorting<K, V, C>::merge(vector<Entry>& in, vector<Entry>& out, int b
           out[k++] = in[i++];
      while (j < e2)					// copy rest of run 2 to S
           out[k++] = in[j++];
-}
-
-
-/* Quick Sort3*/
-
-template<typename K, typename V, typename C>
-inline void Sorting<K, V, C>::quickSort3()
-{
-     if (S.size() <= 1) return;				// already sorted
-     quickSortStep3(0, S.size() - 1);		// call sort utility
-}
-
-template <typename K, typename V, typename C>
-inline void Sorting<K, V, C>::quickSortStep3(int a, int b) {
-     int q;
-     compares++;
-     if (b - a < 2) return;
-     q = median3(a, b);
-     quickSortStep3(a, q);
-     quickSortStep3(q, b);
-}
-
-template<typename K, typename V, typename C>
-inline int Sorting<K, V, C>::median3(int a, int b)
-{
-     Entry x = S[a];
-     Entry y = S[(b - a) / 2 + a];
-     Entry z = S[b - 1];
-     int i = a - 1;
-     int j = b;
-     if (less(x, y) && less(y, z) || less(z, y) && less(y, x)) 
-          x = y;
-     else if (less(x, z) && less(z, y) || less(y, z) && less(z, x))
-          x = z;
-     while (1)
-     {
-          do
-          { 
-               j--; 
-               compares++;
-          } 
-          while (less(x, S[j]));
-
-          do 
-          { 
-               i++; 
-               compares++;
-          } while (less(S[i], x));
-
-          if (i < j) {
-               swap(S[i], S[j]);
-               moves += 3;
-          }
-          else 
-               return (j + 1);
-     }
 }
 
 
